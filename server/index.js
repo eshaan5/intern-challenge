@@ -12,6 +12,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use("/api/products", productRoutes);
+
+const PORT = process.env.PORT || 5000;
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
@@ -19,10 +22,6 @@ mongoose
   })
   .then(() => {
     console.log("MongoDB connected");
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
   .catch((err) => console.error("MongoDB connection error:", err));
-
-app.use("/api/products", productRoutes);
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
