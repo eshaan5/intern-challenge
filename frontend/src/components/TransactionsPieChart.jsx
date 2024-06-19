@@ -14,13 +14,11 @@ const TransactionsPieChart = ({ month }) => {
 
   const fetchPieData = async () => {
     const response = await api.get('/api/products/pie-chart', { params: { month } });
-    console.log(response.data, 'pie data');
     setPieData(response.data.map((d, index) => ({ ...d, color: COLORS[index % COLORS.length] })));
   };
 
   const renderCustomLegend = (props) => {
     const { payload } = props;
-    console.log(payload, 'payload');
     return (
       <ul>
         {payload.map((entry, index) => (
